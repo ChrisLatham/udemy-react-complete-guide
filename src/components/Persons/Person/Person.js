@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import "./Person.css";
+import styles from "./Person.module.css";
 
 class Person extends Component {
   render() {
     const { name, age, click, changed, children } = this.props;
     return (
-      <div className="Person">
+      <div className={styles.Person}>
         <button onClick={click} type="button">
           Delete
         </button>

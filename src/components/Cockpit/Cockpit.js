@@ -1,26 +1,26 @@
 import React from "react";
-import "./Cockpit.css";
+import styles from "./Cockpit.module.css";
 
-const cockpit = ({ persons, showPersons, toggle, title }) => {
+const cockpit = ({ personsLength, showPersons, toggle, title }) => {
   let buttonText = "Show Persons";
   if (showPersons) {
     buttonText = "Hide Persons";
   }
 
   let classes = [];
-  if (persons.length <= 2) {
-    classes.push("red");
+  if (personsLength <= 2) {
+    classes.push(styles.red);
   }
-  if (persons.length <= 1) {
-    classes.push("bold");
+  if (personsLength <= 1) {
+    classes.push(styles.bold);
   }
   return (
     <div>
       <h1>{title}</h1>
       <p className={classes.join(" ")}>
-        There are {persons.length} items in this list.
+        There are {personsLength} items in this list.
       </p>
-      <button className="button" onClick={toggle}>
+      <button className={styles.button} onClick={toggle}>
         {buttonText}
       </button>
     </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import "./Cockpit.css";
 
-const cockpit = ({ persons, showPersons, toggle }) => {
+const cockpit = ({ persons, showPersons, toggle, title }) => {
   let buttonText = "Show Persons";
   if (showPersons) {
     buttonText = "Hide Persons";
@@ -16,7 +16,7 @@ const cockpit = ({ persons, showPersons, toggle }) => {
   }
   return (
     <div>
-      <h1>I'm a react app.</h1>
+      <h1>{title}</h1>
       <p className={classes.join(" ")}>
         There are {persons.length} items in this list.
       </p>

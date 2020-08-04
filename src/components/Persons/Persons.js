@@ -1,17 +1,23 @@
-import React from "react";
+import React, { Component } from "react";
 import Person from "./Person/Person";
 
-const persons = ({ persons, clicked, changed }) =>
-  persons.map(({ id, name, age }, index) => {
-    return (
-      <Person
-        key={id}
-        name={name}
-        age={age}
-        click={() => clicked(index)}
-        changed={(event) => changed(event, id)}
-      />
-    );
-  });
-
-export default persons;
+class Persons extends Component {
+  static getDerivedStateFromProps(props, state) {
+    return state;
+  }
+  render() {
+    const { persons, clicked, changed } = this.props;
+    return persons.map(({ id, name, age }, index) => {
+      return (
+        <Person
+          key={id}
+          name={name}
+          age={age}
+          click={() => clicked(index)}
+          changed={(event) => changed(event, id)}
+        />
+      );
+    });
+  }
+}
+export default Persons;

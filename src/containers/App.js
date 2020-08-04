@@ -12,7 +12,6 @@ class App extends Component {
     ],
     showPersons: false,
   };
-
   nameChangedHandler = (event, id) => {
     // Get index of person from id
     const personIndex = this.state.persons.findIndex((p) => {
@@ -56,6 +55,7 @@ class App extends Component {
     return (
       <div className="App">
         <Cockpit
+          title={this.props.appTitle}
           persons={this.state.persons}
           showPersons={this.state.showPersons}
           toggle={this.togglePersonsHandler}

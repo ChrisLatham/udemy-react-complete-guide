@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useRef, useEffect, useContext } from "react";
 import styles from "./Cockpit.module.css";
+import AuthenticationContext from "../../context/AuthenticationContext";
 
-const cockpit = ({ personsLength, showPersons, toggle, title }) => {
+const Cockpit = ({ personsLength, showPersons, toggle, title }) => {
+  const authContext = useContext(AuthenticationContext);
+  const toggleButtonRef = useRef({});
+  useEffect(() => {
+    toggleButtonRef.current.click();
+  }, []);
   let buttonText = "Show Persons";
   if (showPersons) {
     buttonText = "Hide Persons";
@@ -20,11 +26,14 @@ const cockpit = ({ personsLength, showPersons, toggle, title }) => {
       <p className={classes.join(" ")}>
         There are {personsLength} items in this list.
       </p>
-      <button className={styles.button} onClick={toggle}>
+      <button ref={toggleButtonRef} className={styles.button} onClick={toggle}>
         {buttonText}
+      </button>
+      <button className={styles.button} onClick={authContext.login}>
+        Log In
       </button>
     </div>
   );
 };
 
-export default cockpit;
+export default Cockpit;

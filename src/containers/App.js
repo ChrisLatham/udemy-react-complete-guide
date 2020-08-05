@@ -3,6 +3,7 @@ import Cockpit from "../components/Cockpit/Cockpit";
 import Persons from "../components/Persons/Persons";
 import styles from "./App.module.css";
 import WithStyles from "../hoc/WithStyles";
+import AuthenticationContext from "../context/AuthenticationContext";
 
 class App extends Component {
   state = {
@@ -13,6 +14,7 @@ class App extends Component {
     ],
     showPersons: false,
     changeCounter: 0,
+    authenticated: false,
   };
   nameChangedHandler = (event, id) => {
     // Get index of person from id
@@ -48,6 +50,10 @@ class App extends Component {
     this.setState({ showPersons: !doesShow });
   };
 
+  loginHandler = () => {
+    this.setState({ authenticated: true });
+  };
+
   render() {
     let persons = null;
     if (this.state.showPersons) {
@@ -56,19 +62,27 @@ class App extends Component {
           persons={this.state.persons}
           clicked={this.deletePersonHandler}
           changed={this.nameChangedHandler}
+          isAuthenticated={this.state.authenticated}
         />
       );
     }
 
     return (
       <WithStyles styles={styles.App}>
-        <Cockpit
-          title={this.props.appTitle}
-          personsLength={this.state.persons.length.valueOf()}
-          showPersons={this.state.showPersons}
-          toggle={this.togglePersonsHandler}
-        />
-        {persons}
+        <AuthenticationContext.Provider
+          value={{
+            isAuthenticated: this.state.authenticated,
+            login: this.loginHandler,
+          }}
+        >
+          <Cockpit
+            title={this.props.appTitle}
+            personsLength={this.state.persons.length.valueOf()}
+            showPersons={this.state.showPersons}
+            toggle={this.togglePersonsHandler}
+          />
+          {persons}
+        </AuthenticationContext.Provider>
       </WithStyles>
     );
   }

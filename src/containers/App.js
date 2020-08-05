@@ -12,6 +12,7 @@ class App extends Component {
       { id: 3, name: "Stephanie", age: 26 },
     ],
     showPersons: false,
+    changeCounter: 0,
   };
   nameChangedHandler = (event, id) => {
     // Get index of person from id
@@ -26,7 +27,13 @@ class App extends Component {
     const persons = [...this.state.persons];
     persons[personIndex] = person;
     // Update the state with our new copy of the persons array
-    this.setState({ persons: persons });
+    // State updated here using a function that has prevState as a property as it needs the previous state in order to update changeCounter
+    this.setState((prevState) => {
+      return {
+        persons: persons,
+        changeCounter: prevState.changeCounter + 1,
+      };
+    });
   };
 
   deletePersonHandler = (personIndex) => {

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import styles from "./Person.module.css";
 
 class Person extends Component {
@@ -18,5 +19,12 @@ class Person extends Component {
     );
   }
 }
+
+Person.propTypes = {
+  name: PropTypes.string,
+  age: PropTypes.number,
+  click: PropTypes.func,
+  changed: PropTypes.func,
+};
 
 export default Person;
